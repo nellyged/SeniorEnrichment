@@ -17,10 +17,10 @@ const Campus = conn.define('campus', {
       notEmpty: true,
     },
   },
-  // imageUrl: {
-  //   type: Sequelize.STRING,
-  //   defaultValue: '',
-  // },
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue: '',
+  },
   // address: {
   //   type: Sequelize.STRING,
   //   allowNull: false,
@@ -74,19 +74,19 @@ const syncAndSeed = () => {
     Promise.all([
       Campus.create({
         name: 'FullStack',
-        // imageUrl: faker.image.imageUrl(),
+        imageUrl: faker.image.imageUrl(),
         // address: faker.fake('{{address.city}}'),
         // description: faker.lorem.paragraph(),
       }),
       Campus.create({
         name: 'NYU',
-        // imageUrl: faker.image.imageUrl(),
+        imageUrl: faker.image.imageUrl(),
         // address: faker.fake('{{address.city}}'),
         // description: faker.lorem.paragraph(),
       }),
       Campus.create({
         name: 'Potsdam',
-        // imageUrl: faker.image.imageUrl(),
+        imageUrl: faker.image.imageUrl(),
         // address: faker.fake('{{address.city}}'),
         // description: faker.lorem.paragraph(),
       }),
