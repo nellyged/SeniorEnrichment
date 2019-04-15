@@ -12,6 +12,8 @@ import Campuses from './Campuses';
 import Students from './Students';
 import Campus from './Campus';
 import Student from './Student';
+import CampusForm from './CampusForm';
+import StudentForm from './StudentForm';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -28,12 +30,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        Welcome To BlackBoard!!!
+        <h1>Welcome To BlackBoard!!!</h1>
         <Route component={Nav} />
         <Switch>
-          <Route exact path="/students" component={Students} />
           <Route exact path="/campuses" component={Campuses} />
+          <Route path="/campuses/create" component={CampusForm} />
           <Route path="/campuses/:id" component={Campus} />
+          <Route exact path="/students" component={Students} />
+          <Route path="/students/create" component={StudentForm} />
           <Route path="/students/:id" component={Student} />
           <Redirect path="/" to="/campuses" />
         </Switch>

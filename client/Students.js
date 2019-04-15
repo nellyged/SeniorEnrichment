@@ -8,15 +8,20 @@ const mapStateToProps = state => {
 
 const Students = ({ students }) => {
   return (
-    <ul>
-      {students.map(student => (
-        <li key={student.id}>
-          <Link to={`/students/${student.id}`}>{`${student.firstName} ${
-            student.lastName
-          }`}</Link>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <Link to="/students/create">
+        <button className="btn btn-primary">Add New Student</button>
+      </Link>
+      <ul>
+        {students.map(student => (
+          <li key={student.id}>
+            <Link to={`/students/${student.id}`}>{`${student.firstName} ${
+              student.lastName
+            }`}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

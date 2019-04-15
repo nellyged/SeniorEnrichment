@@ -29,6 +29,15 @@ const fetchCampuses = () => {
   };
 };
 
+const addCampus = (campus, history) => {
+  return dispatch => {
+    return axios.post('/api/campuses', campus).then(() => {
+      dispatch(fetchCampuses());
+      history.push('/campuses');
+    });
+  };
+};
+
 const fetchStudents = () => {
   return dispatch => {
     return axios
@@ -37,6 +46,15 @@ const fetchStudents = () => {
       .then(students => {
         dispatch(getStudents(students));
       });
+  };
+};
+
+const addStudent = (student, history) => {
+  return dispatch => {
+    return axios.post('/api/students', student).then(() => {
+      dispatch(fetchStudents());
+      history.push('/students');
+    });
   };
 };
 
@@ -69,4 +87,4 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(createLogger({ collapsed: true }), thunk))
 );
 
-export { store, fetchCampuses, fetchStudents };
+export { store, fetchCampuses, fetchStudents, addCampus, addStudent };
