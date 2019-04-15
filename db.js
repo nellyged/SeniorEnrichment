@@ -14,7 +14,7 @@ const Campus = conn.define('campus', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: faker.image.imageUrl(),
+    defaultValue: faker.fake('{{image.city}}'),
   },
   address: {
     type: Sequelize.STRING,
