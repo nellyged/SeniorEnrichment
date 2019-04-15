@@ -50,6 +50,32 @@ app.post('/api/students', (req, res, next) => {
     .catch(next);
 });
 
+//DELETE Campus By Id
+app.delete('/api/campuses/:id', (req, res, next) => {
+  Campus.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(next);
+});
+
+//DELETE Student By Id
+app.delete('/api/students/:id', (req, res, next) => {
+  Student.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(next);
+});
+
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;

@@ -38,6 +38,14 @@ const addCampus = (campus, history) => {
   };
 };
 
+const removeCampus = id => {
+  return dispatch => {
+    return axios.delete(`/api/campuses/${id}`).then(() => {
+      dispatch(fetchCampuses());
+    });
+  };
+};
+
 const fetchStudents = () => {
   return dispatch => {
     return axios
@@ -54,6 +62,14 @@ const addStudent = (student, history) => {
     return axios.post('/api/students', student).then(() => {
       dispatch(fetchStudents());
       history.push('/students');
+    });
+  };
+};
+
+const removeStudent = id => {
+  return dispatch => {
+    return axios.delete(`/api/students/${id}`).then(() => {
+      dispatch(fetchStudents());
     });
   };
 };
@@ -87,4 +103,12 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(createLogger({ collapsed: true }), thunk))
 );
 
-export { store, fetchCampuses, fetchStudents, addCampus, addStudent };
+export {
+  store,
+  fetchCampuses,
+  fetchStudents,
+  addCampus,
+  addStudent,
+  removeCampus,
+  removeStudent,
+};

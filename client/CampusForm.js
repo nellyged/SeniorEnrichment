@@ -19,7 +19,6 @@ class CampusForm extends Component {
   }
   onChange = ev => {
     this.setState({ [ev.target.name]: ev.target.value });
-    console.log(this.state);
   };
   onSubmit = ev => {
     ev.preventDefault();
