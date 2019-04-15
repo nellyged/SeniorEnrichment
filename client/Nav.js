@@ -2,11 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Nav = ({ location: { pathname } }) => {
-  console.log(pathname);
   const tabs = [
     {
       title: 'Home',
-      path: '/',
+      path: '/campuses',
     },
     {
       title: 'Students',

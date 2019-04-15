@@ -10,6 +10,8 @@ import { fetchCampuses, fetchStudents } from './store';
 import Nav from './Nav';
 import Campuses from './Campuses';
 import Students from './Students';
+import Campus from './Campus';
+import Student from './Student';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -29,9 +31,11 @@ class App extends Component {
         Welcome To BlackBoard!!!
         <Route component={Nav} />
         <Switch>
-          <Route exact path="/" component={Campuses} />
-          <Route path="/students" component={Students} />
-          <Redirect path="/campuses" to="/" />
+          <Route exact path="/students" component={Students} />
+          <Route exact path="/campuses" component={Campuses} />
+          <Route path="/campuses/:id" component={Campus} />
+          <Route path="/students/:id" component={Student} />
+          <Redirect path="/" to="/campuses" />
         </Switch>
       </Router>
     );

@@ -1,14 +1,9 @@
-import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
+/* eslint-disable default-case */
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 import axios from 'axios';
 import thunk from 'redux-thunk';
-
-const initialState = {
-  campuses: [],
-  students: [],
-};
 
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_STUDENTS = 'GET_STUDENTS';
@@ -45,16 +40,29 @@ const fetchStudents = () => {
   };
 };
 
-const reducer = (state = initialState, action) => {
+const campuses = (state = [], action) => {
+  // eslint-disable-next-line default-case
   switch (action.type) {
     case GET_CAMPUSES:
-      return { ...state, campuses: action.campuses };
-    case GET_STUDENTS:
-      return { ...state, students: action.students };
+      return action.campuses;
     default:
       return state;
   }
 };
+
+const students = (state = [], action) => {
+  switch (action.type) {
+    case GET_STUDENTS:
+      return action.students;
+    default:
+      return state;
+  }
+};
+
+const reducer = combineReducers({
+  campuses,
+  students,
+});
 
 const store = createStore(
   reducer,
