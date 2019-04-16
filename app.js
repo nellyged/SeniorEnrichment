@@ -76,6 +76,22 @@ app.delete('/api/students/:id', (req, res, next) => {
     .catch(next);
 });
 
+//PUT Campus By Id
+app.put('/api/campuses/:id', (req, res, next) => {
+  Campus.findByPk(req.params.id * 1)
+    .then(campus => campus.update(req.body))
+    .then(campus => res.send(campus))
+    .catch(next);
+});
+
+//PUT Student By Id
+app.put('/api/students/:id', (req, res, next) => {
+  Student.findByPk(req.params.id * 1)
+    .then(student => student.update(req.body))
+    .then(student => res.send(student))
+    .catch(next);
+});
+
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;

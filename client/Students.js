@@ -19,12 +19,28 @@ const Students = ({ students, campuses, deleteStudent }) => {
       <Link to="/students/create">
         <button className="btn btn-primary">Add New Student</button>
       </Link>
-      <ul className="list-group" style={{ display: 'flex', marginTop: '10px' }}>
+      <ul
+        className="list-group"
+        style={{
+          display: 'flex',
+          marginTop: '10px',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+        }}
+      >
         {students.map(student => (
           <li className="list-group-item" key={student.id}>
-            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                flexDirection: 'column',
+              }}
+            >
               <div>
                 <Link to={`/students/${student.id}`}>
+                  <img src={student.imageUrl} />
+                  <br />
                   {`${student.firstName} ${student.lastName}`}
                 </Link>
                 <br />
@@ -39,12 +55,27 @@ const Students = ({ students, campuses, deleteStudent }) => {
                   ''
                 )}
               </div>
-              <button
-                className="btn btn-danger"
-                onClick={() => deleteStudent(student.id)}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space',
+                  marginTop: '10px',
+                }}
               >
-                X
-              </button>
+                <Link
+                  to={`/students/create/${student.id}`}
+                  className="btn btn-primary"
+                >
+                  Edit
+                </Link>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteStudent(student.id)}
+                >
+                  X
+                </button>
+              </div>
             </div>
           </li>
         ))}

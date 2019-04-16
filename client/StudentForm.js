@@ -1,22 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addStudent } from './store';
+import { addEditStudent } from './store';
 
 const mapDispatchToProps = dispatch => {
   return {
-    createStudent: (student, history) => dispatch(addStudent(student, history)),
+    createStudent: (student, history) =>
+      dispatch(addEditStudent(student, history)),
   };
 };
 
 class StudentForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      gpa: '',
-    };
+  constructor(props) {
+    super(props);
+    if (!props.id) {
+      this.state = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        gpa: '',
+      };
+    } else {
+      const { student } = props;
+      this.state = {
+        firstName: student ? student.firstName : '',
+        lastName: student ? student.lastName : '',
+        email: student ? student.email : '',
+        gpa: student ? student.gpa : '',
+      };
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.id && !prevProps.student && this.props.student) {
+      const { student } = this.props;
+      this.setState = {
+        firstName: student ? student.firstName : '',
+        lastName: student ? student.lastName : '',
+        email: student ? student.email : '',
+        gpa: student ? student.gpa : '',
+      };
+    }
   }
   onChange = ev => {
     this.setState({ [ev.target.name]: ev.target.value });
@@ -24,7 +46,11 @@ class StudentForm extends Component {
   onSubmit = ev => {
     ev.preventDefault();
     const { createStudent, history } = this.props;
-    createStudent(this.state, history);
+    const student = { ...this.state };
+    if (this.props.id) {
+      student.id = this.props.id;
+    }
+    createStudent(student, history);
   };
   render() {
     const { firstName, lastName, email, gpa } = this.state;
@@ -68,7 +94,7 @@ class StudentForm extends Component {
         />
         <br />
         <button type="submit" className="btn btn-primary">
-          Create
+          {this.props.id ? 'Edit' : 'Create'}
         </button>
       </form>
     );
