@@ -36,11 +36,11 @@ const Student = ({ students, campuses, match }) => {
             <strong>GPA:</strong>
           </em>{' '}
           {`${displayStudent.gpa}`} <br />
-          <img src={displayStudent.imageUrl} />
+          <img src={displayStudent.imageUrl} style={{ maxWidth: '100%' }} />
         </div>
       ) : (
-        <div>
-          Student Not Found
+        <div style={{ display: 'flex', marginTop: '20px' }}>
+          <h6>Student Not Found</h6>
           <br />
         </div>
       )}
@@ -50,11 +50,13 @@ const Student = ({ students, campuses, match }) => {
           <h4>Campus</h4>
           <Link to={`/campuses/${displayCampus.id}`}>
             {displayCampus.name} <br />
-            <img src={displayCampus.imageUrl} />
+            <img src={displayCampus.imageUrl} style={{ maxWidth: '100%' }} />
           </Link>
         </div>
       ) : (
-        <div>Student Has Not Yet Selected A Campus</div>
+        <div style={{ display: 'flex', marginTop: '20px' }}>
+          <h6>Student Has Not Yet Selected A Campus</h6>
+        </div>
       )}
     </div>
   );

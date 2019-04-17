@@ -44,7 +44,7 @@ const Students = ({ students, campuses, deleteStudent }) => {
                   {`${student.firstName} ${student.lastName}`}
                 </Link>
                 <br />
-                {student.campusId ? (
+                {student.campusId && campuses.length ? (
                   <Link to={`/campuses/${student.campusId}`}>
                     {
                       campuses.find(campus => campus.id === student.campusId)
@@ -73,7 +73,7 @@ const Students = ({ students, campuses, deleteStudent }) => {
                   className="btn btn-danger"
                   onClick={() => deleteStudent(student.id)}
                 >
-                  X
+                  Delete
                 </button>
               </div>
             </div>

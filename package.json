@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "DATABASE_URL=postgres://localhost/seniorproject node ./seed.js",
     "start:db": "DATABASE_URL=postgres://localhost/seniorproject nodemon ./server.js",
     "postinstall": "./node_modules/webpack/bin/webpack.js",
     "webpack": "webpack",

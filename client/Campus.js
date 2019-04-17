@@ -33,11 +33,11 @@ const Campus = ({ campuses, students, match }) => {
             <strong>Description:</strong>
           </em>{' '}
           {displayCampus.description} <br />
-          <img src={displayCampus.imageUrl} />
+          <img src={displayCampus.imageUrl} style={{ maxWidth: '100%' }} />
         </div>
       ) : (
-        <div>
-          Campus Not Found
+        <div style={{ display: 'flex', marginTop: '20px' }}>
+          <h6>Campus Not Found</h6>
           <br />
         </div>
       )}
@@ -54,8 +54,8 @@ const Campus = ({ campuses, students, match }) => {
           </ul>
         </div>
       ) : (
-        <div>
-          Studnets Not Found
+        <div style={{ display: 'flex', marginTop: '20px' }}>
+          <h6>Studnets Not Found</h6>
           <br />
         </div>
       )}

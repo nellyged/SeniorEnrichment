@@ -68,7 +68,8 @@ class App extends Component {
             )}
           />
           <Route path="/students/:id" component={Student} />
-          <Redirect path="/" to="/campuses" />
+          <Redirect exact path="/" to="/campuses" />
+          <Route render={() => <h1>Page Not Found</h1>} />
         </Switch>
       </Router>
     );

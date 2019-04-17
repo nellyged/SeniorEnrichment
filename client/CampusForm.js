@@ -16,6 +16,7 @@ class CampusForm extends Component {
         name: '',
         address: '',
         description: '',
+        errors: [],
       };
     } else {
       const { campus } = this.props;
@@ -23,6 +24,7 @@ class CampusForm extends Component {
         name: campus ? campus.name : '',
         address: campus ? campus.address : '',
         description: campus ? campus.description : '',
+        errors: [],
       };
     }
   }
@@ -33,6 +35,7 @@ class CampusForm extends Component {
         name: campus ? campus.name : '',
         address: campus ? campus.address : '',
         description: campus ? campus.description : '',
+        errors: [],
       });
     }
   }
@@ -46,14 +49,23 @@ class CampusForm extends Component {
     if (id) {
       campus.id = id;
     }
-    createCampus(campus, history);
+    createCampus(campus, history).catch(ex => {
+      this.setState({ errors: ex.response.data.errors });
+    });
   };
   render() {
-    const { name, address, description } = this.state;
+    const { name, address, description, errors } = this.state;
     const { id } = this.props;
     const { onChange, onSubmit } = this;
     return (
       <form onSubmit={onSubmit}>
+        {!!errors.length && (
+          <ul className="alert alert-danger">
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+        )}
         <input
           className="form-control"
           placeholder="Name"

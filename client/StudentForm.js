@@ -18,6 +18,7 @@ class StudentForm extends Component {
         lastName: '',
         email: '',
         gpa: '',
+        errors: [],
       };
     } else {
       const { student } = props;
@@ -26,18 +27,20 @@ class StudentForm extends Component {
         lastName: student ? student.lastName : '',
         email: student ? student.email : '',
         gpa: student ? student.gpa : '',
+        errors: [],
       };
     }
   }
   componentDidUpdate(prevProps) {
     if (this.props.id && !prevProps.student && this.props.student) {
       const { student } = this.props;
-      this.setState = {
+      this.setState({
         firstName: student ? student.firstName : '',
         lastName: student ? student.lastName : '',
         email: student ? student.email : '',
         gpa: student ? student.gpa : '',
-      };
+        errors: [],
+      });
     }
   }
   onChange = ev => {
@@ -50,13 +53,22 @@ class StudentForm extends Component {
     if (this.props.id) {
       student.id = this.props.id;
     }
-    createStudent(student, history);
+    createStudent(student, history).catch(ex => {
+      this.setState({ errors: ex.response.data.errors });
+    });
   };
   render() {
-    const { firstName, lastName, email, gpa } = this.state;
+    const { firstName, lastName, email, gpa, errors } = this.state;
     const { onChange, onSubmit } = this;
     return (
       <form onSubmit={onSubmit}>
+        {!!errors.length && (
+          <ul className="alert alert-danger">
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+        )}
         <input
           className="form-control"
           placeholder="First Name"
